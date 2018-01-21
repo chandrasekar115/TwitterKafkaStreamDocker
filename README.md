@@ -15,6 +15,7 @@ Cloud Virtual Machine OS: Ubuntu
 Steps to setup the project
 
 1. Clone git project 
+
 	divyateja15@analyticsvm:~$ git clone https://github.com/divyateja15/TwitterKafkaStream.git
 
 2. Maven Install
