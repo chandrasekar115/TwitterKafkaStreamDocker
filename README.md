@@ -1,4 +1,16 @@
-Real Time Streaming using Kafka and Spark Streaming with Twitter as a stream source
+Prerequisite Softwares
+
+Java 1.8
+Maven 3.3.9
+Git 2.7.4
+Scala 2.11.8
+Kafka 0.11.1
+Spark 2.2.1
+npm
+Node.js
+screen
+
+Cloud Virtual Machine OS: Ubuntu
 
 Steps to setup the project
 
@@ -10,7 +22,7 @@ Steps to setup the project
 	divyateja15@analyticsvm:~$ cd TwitterKafkaStream
 	divyateja15@analyticsvm:~/TwitterKafkaStream$ mvn clean install
 	
-	Hint: Screen is a terminal multiplexer, which allows a user to access multiple separate terminal sessions inside a single terminal    window or remote terminal session (such as when using SSH).
+	Hint: Screen is a terminal multiplexer, which allows a user to access multiple separate terminal sessions inside a single terminal window or remote terminal session (such as when using SSH).
 	Example Commands for Screen :
 	screen -S newscreenname
 	screen -r reopenexisitingscreen
