@@ -79,6 +79,12 @@
 	- > divyateja15@analyticsvm:~/TwitterKafkaStream/target$ `spark-submit --class com.analyticsproject.kakfastreaming.TwitterKafkaConsumer --master local[4] --jars $(echo ./lib/*.jar | tr ' ' ',') twitterkafkastream-0.0.1-SNAPSHOT.jar`
 	- **Detach Screen using ctrl+a+d keys**
 	
+	**NOTE-- First time execution for users**
+	- **To Create SSH Keys**
+	- > divyateja15@analyticsvm:~$ `ssh-keygen -t rsa -P ""`
+	- > divyateja15@analyticsvm:~$ `cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys`
+	- > divyateja15@analyticsvm:~$ `ssh-copy-id -i /home/divya15teja/.ssh/id_rsa.pub divya15teja@localhost`
+	
 8. **Start Hadoop Daemons**
 	- **To Start Hadoop Daemons**
 	- > divyateja15@analyticsvm:~$ `start-dfs.sh`
