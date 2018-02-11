@@ -60,24 +60,6 @@
 	
 5. **View list of Kafka Topics**
 	- >divyateja15@analyticsvm:~$ `kafka-topics.sh --list --zookeeper localhost:2181`
-
-6. **Start Kafka Producer to Genereate Tweets**
-	- **Create a Screen for Kafka Producer Topic**
-	- > divyateja15@analyticsvm:~$ `screen -S kafkaproducer`
-	- **Navigate to Project Target Folder**
-	- > divyateja15@analyticsvm:~$ `cd TwitterKafkaStream/target/`
-	- **Start Kafka Producer Topic**
-	- > divyateja15@analyticsvm:~/TwitterKafkaStream/target$ `scala -cp twitterkafkastream-0.0.1-SNAPSHOT.jar:lib/*:. com.analyticsproject.kakfastreaming.TwitterKafkaProducer`
-	- **Detach Screen using ctrl+a+d keys**
-	
-7. **Start Kafka Consumer using Spark Streaming to aggregate Tweets**
-	- **Create a Screen for Kafka Consumer Topic**
-	- > divyateja15@analyticsvm:~$ `screen -S kafkaconsumer`
-	- **Navigate to Project Target Folder**
-	- > divyateja15@analyticsvm:~$ `cd TwitterKafkaStream/target/`
-	- **Start Kafka Consumer Topic using Spark Submit**
-	- > divyateja15@analyticsvm:~/TwitterKafkaStream/target$ `spark-submit --class com.analyticsproject.kakfastreaming.TwitterKafkaConsumer --master local[4] --jars $(echo ./lib/*.jar | tr ' ' ',') twitterkafkastream-0.0.1-SNAPSHOT.jar`
-	- **Detach Screen using ctrl+a+d keys**
 	
 	**NOTE-- First time execution for users**
 	- **To Create SSH Keys**
@@ -85,14 +67,14 @@
 	- > divyateja15@analyticsvm:~$ `cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys`
 	- > divyateja15@analyticsvm:~$ `ssh-copy-id -i /home/divya15teja/.ssh/id_rsa.pub divya15teja@localhost`
 	
-8. **Start Hadoop Daemons**
+6. **Start Hadoop Daemons**
 	- **To Start Hadoop Daemons**
 	- > divyateja15@analyticsvm:~$ `start-dfs.sh`
 	- **To Start Yarn Daemons**
 	- > divyateja15@analyticsvm:~$ `start-yarn.sh`
 	- **To Start Job History Server**
 	- > divyateja15@analyticsvm:~$ `mr-jobhistory-daemon.sh start historyserver`
-	**Check the below daemons are running in your server**
+	- **Check the below daemons are running in your server**
 	- > divyateja15@analyticsvm:~$ `jps`
 	- **9537 NodeManager**
 	- **8865 NameNode**
@@ -101,8 +83,7 @@
 	- 9845 Jps
 	- 2025 QuorumPeerMain
 	- **9406 ResourceManager**
-	- **9231 SecondaryNameNode**
-	
+	- **9231 SecondaryNameNode**	
 	- **NOTE --- Stop the daemons only it is requires**
 	- **To Stop Hadoop Daemons**
 	- > divyateja15@analyticsvm:~$ `stop-dfs.sh`
@@ -110,6 +91,25 @@
 	- > divyateja15@analyticsvm:~$ `stop-yarn.sh`
 	- **To Stop Job History Server**
 	- > divyateja15@analyticsvm:~$ `mr-jobhistory-daemon.sh stop historyserver`	
+
+7. **Start Kafka Producer to Genereate Tweets**
+	- **Create a Screen for Kafka Producer Topic**
+	- > divyateja15@analyticsvm:~$ `screen -S kafkaproducer`
+	- **Navigate to Project Target Folder**
+	- > divyateja15@analyticsvm:~$ `cd TwitterKafkaStream/target/`
+	- **Start Kafka Producer Topic**
+	- > divyateja15@analyticsvm:~/TwitterKafkaStream/target$ `scala -cp twitterkafkastream-0.0.1-SNAPSHOT.jar:lib/*:. com.analyticsproject.kakfastreaming.TwitterKafkaProducer`
+	- **Detach Screen using ctrl+a+d keys**
+	
+8. **Start Kafka Consumer using Spark Streaming to aggregate Tweets**
+	- **Create a Screen for Kafka Consumer Topic**
+	- > divyateja15@analyticsvm:~$ `screen -S kafkaconsumer`
+	- **Navigate to Project Target Folder**
+	- > divyateja15@analyticsvm:~$ `cd TwitterKafkaStream/target/`
+	- **Start Kafka Consumer Topic using Spark Submit**
+	- > divyateja15@analyticsvm:~/TwitterKafkaStream/target$ `spark-submit --class com.analyticsproject.kakfastreaming.TwitterKafkaConsumer --master local[4] --jars $(echo ./lib/*.jar | tr ' ' ',') twitterkafkastream-0.0.1-SNAPSHOT.jar`
+	- **Detach Screen using ctrl+a+d keys**
+
 	
 9. **Start Console View**
 	- **Create a Screen for Console**
