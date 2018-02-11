@@ -8,8 +8,8 @@ object TwitterConstants {
   val TOPIC_NAME_PRODUCER = "twitterstreamproducer"
   val TOPIC_NAME_CONSUMER = "twitterstreamconsumer"
   val KAFKA_BROKER = "localhost:9092"
-  //val HASH_TAGS = Array("Airtel","Aircel","Telenor","Tata Docomo","Vodafone","Jio","Reliance Communications","BSNL","MTNL")
-  val HASH_TAGS = Array("Airtel")
+  val HASH_TAGS = Array("Airtel","Aircel","Telenor","Tata Docomo","Vodafone","Jio","Reliance Communications","BSNL","MTNL")
+  //val HASH_TAGS = Array("Airtel")
   val ZK_QUORUM = "localhost:2181"
   val GROUP = "TwitterStreamingConsumerGroup"
   val NUM_THREADS = 4
