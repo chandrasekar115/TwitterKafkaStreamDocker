@@ -1,0 +1,93 @@
+--create the tweets table containing the records as received from Twitter
+
+--- Type hive in terminal
+divya15teja@analyticsvm:~$ hive
+
+create database twitter;
+
+use twitter;
+
+create external table tweets(id STRING, user_id STRING, user_name STRING, user_screen_name STRING, user_language STRING, user_location STRING, user_timezone STRING, user_followers STRING, user_favorites STRING, retweet_count STRING, reply_status_id STRING, reply_user_id STRING, source STRING, text STRING, latitude STRING, longitude STRING, user_created_at STRING, created_at STRING,created_at_year STRING, created_at_month STRING, created_at_day STRING, created_at_hour STRING, created_at_minute STRING) partitioned by (tweet_created_at string) row format SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+   "separatorChar" = "\t",
+   "quoteChar"     = "\'"
+)  
+stored as textfile location '/hive_warehouse/tweets/';
+
+-- create sentiment dictionary
+CREATE EXTERNAL TABLE dictionary (
+    type string,
+    length int,
+    word string,
+    pos string,
+    stemmed string,
+    polarity string
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
+STORED AS TEXTFILE
+LOCATION '/hive_warehouse/dictionary';
+
+// Copy the data to hdfs file system
+hduser@hduser:~$ hdfs dfs -put /home/divya15teja/TwitterKafkaStream/hivequeries/dictionary.tsv /hive_warehouse/dictionary/
+
+--- Note Start Kafka Producer and Consumer 
+--- Execute Step no 8 & 9
+--- To Check Kafka Producer and Consumer Working execute the below command in separate terminal
+--- divya15teja@analyticsvm:~$ kafka-console-consumer.sh --zookeeper localhost:2181 --topic twitterstreamproducer from-beginning
+--- divya15teja@analyticsvm:~$ kafka-console-consumer.sh --zookeeper localhost:2181 --topic twitterstreamconsumer from-beginning
+
+--- Every Time Do a below Query
+msck repair table tweets;
+
+-- Clean up tweets
+CREATE VIEW tweets_simple AS
+SELECT  id, user_screen_name,
+case when regexp_extract(lower(text),'airtel',0) = 'airtel' then 'Airtel'
+when regexp_extract(lower(text),'aircel',0) = 'aircel' then 'Aircel'
+when regexp_extract(lower(text),'telenor',0) = 'telenor' then 'Telenor'
+when regexp_extract(lower(text),'tata docomo',0) = 'tata docomo' then 'Tata Docomo'
+when regexp_extract(lower(text),'vodafone',0) = 'vodafone' then 'Vodafone'
+when regexp_extract(lower(text),'jio',0) = 'jio' then 'Jio'
+when regexp_extract(lower(text),'reliance communications',0) = 'reliance communications' then 'Reliance Communications'
+when regexp_extract(lower(text),'bsnl',0) = 'bsnl' then 'BSNL'
+when regexp_extract(lower(text),'mtnl',0) = 'mtnl' then 'MTNL'
+else 'Others' 
+end as hashtags,
+cast(from_unixtime(unix_timestamp(substring(created_at,0,16), 'yyyy-MM-dd HH:mm')) as timestamp) time_stamp,
+text
+FROM tweets;
+
+
+-- Compute sentiment
+create view l1 as select time_stamp, id, user_screen_name, hashtags, words from tweets_simple lateral view explode(sentences(lower(text))) dummy as words;
+create view l2 as select time_stamp, id, user_screen_name, hashtags, word from l1 lateral view explode( words ) dummy as word;
+
+-- was: select * from l2 left outer join dict d on l2.word = d.word where polarity = 'negative' limit 10;
+
+create view l3 as select 
+    time_stamp, id, hashtags, user_screen_name,
+    l2.word, 
+    case d.polarity 
+      when  'negative' then -1
+      when 'positive' then 1 
+      else 0 end as polarity 
+ from l2 left outer join dictionary d on l2.word = d.word;
+ 
+create table tweets_sentiment as select 
+ time_stamp, id, user_screen_name, hashtags,
+  case 
+    when sum( polarity ) > 0 then 'positive' 
+    when sum( polarity ) < 0 then 'negative'  
+    else 'neutral' end as sentiment 
+from l3 group by  time_stamp, id, user_screen_name, hashtags;
+
+
+create table tweets_sentiment_hashtags as select 
+ hashtags,
+  case 
+    when sum( polarity ) > 0 then 'positive' 
+    when sum( polarity ) < 0 then 'negative'  
+    else 'neutral' end as sentiment, count(*) as count_sentiment
+from l3 group by  hashtags;
+
+
