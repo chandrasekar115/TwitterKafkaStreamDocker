@@ -66,7 +66,7 @@ object TwitterKafkaConsumer {
     val cpDir = sys.env.getOrElse("CHKPOINT_DIR", "/tmp").toString
 
     // HDFS directory to store twitter tweets
-    val opDir = sys.env.getOrElse("OP_DIR", "hdfs://localhost:9000/user/hduser/hive_warehouse/tweets/")
+    val opDir = sys.env.getOrElse("OP_DIR", "hdfs://localhost:9000/hive_warehouse/tweets/")
 
     // Every Seconds - Ouput Batches size
     val opBatchInterval = sys.env.get("OP_BATCH_INTERVAL").map(_.toInt).getOrElse(60)
