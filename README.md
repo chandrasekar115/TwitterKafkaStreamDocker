@@ -16,6 +16,8 @@
 
 1. **Clone git project**
 	> divyateja15@analyticsvm:~$ `git clone https://github.com/divyateja15/TwitterKafkaStream.git`
+	**If already done do git pull**
+	> divyateja15@analyticsvm:~$ `git pull`
 
 2. **Maven Install**
 	- **Navigate to Project Folder**
