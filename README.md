@@ -92,6 +92,17 @@
 	- > divyateja15@analyticsvm:~$ `start-yarn.sh`
 	- **To Start Job History Server**
 	- > divyateja15@analyticsvm:~$ `mr-jobhistory-daemon.sh start historyserver`
+	**Check the below daemons are running in your server**
+	- > divyateja15@analyticsvm:~$ `jps`
+	- **9537 NodeManager**
+	- **8865 NameNode**
+	- **9026 DataNode**
+	- 2564 Kafka
+	- 9845 Jps
+	- 2025 QuorumPeerMain
+	- **9406 ResourceManager**
+	- **9231 SecondaryNameNode**
+	
 	- **NOTE --- Stop the daemons only it is requires**
 	- **To Stop Hadoop Daemons**
 	- > divyateja15@analyticsvm:~$ `stop-dfs.sh`
