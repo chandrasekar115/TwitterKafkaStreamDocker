@@ -57,6 +57,8 @@ cast(from_unixtime(unix_timestamp(substring(created_at,0,16), 'yyyy-MM-dd HH:mm'
 text
 FROM tweets;
 
+--Product Counts
+CREATE VIEW product_count AS select tweets_simple.hashtags,count(*) from twitter.tweets_simple group by tweets_simple.hashtags
 
 -- Compute sentiment
 create view l1 as select time_stamp, id, user_screen_name, hashtags, words from tweets_simple lateral view explode(sentences(lower(text))) dummy as words;
