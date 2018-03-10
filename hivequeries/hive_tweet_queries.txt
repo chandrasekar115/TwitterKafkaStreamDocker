@@ -75,6 +75,10 @@ create view l3 as select
       else 0 end as polarity 
  from l2 left outer join dictionary d on l2.word = d.word;
  
+--Trending Tweets
+create view trending_tweets as select hashtags,l3.word,count(*) as cnt from l3 where polarity in (1,-1) group by hashtags,l3.word having cnt>=10;
+
+ 
 create table tweets_sentiment as select 
  time_stamp, id, user_screen_name, hashtags,
   case 
