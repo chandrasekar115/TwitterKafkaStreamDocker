@@ -1,0 +1,23 @@
+<workflow-app name="twitterjobs" xmlns="uri:oozie:workflow:0.2">
+        <start to="alpagg"/>
+        <action name="alpagg">
+            <java>
+                <job-tracker>${jobTracker}</job-tracker>
+                <name-node>${nameNode}</name-node>
+                                <configuration>
+                                        <property>
+                                                <name>mapred.job.queue.name</name>
+                                                <value>${queueName}</value>
+                                        </property>
+                                </configuration>
+                                <main-class>com.alp.repository.HiveProdCount</main-class>
+                                <capture-output/>
+            </java>
+            <ok to="end"/>
+            <error to="killJob"/>
+        </action>
+        <kill name="killJob">
+        <message>"Killed job due to error: ${wf:errorMessage(wf:lastErrorNode())}"</message>
+    </kill>
+        <end name="end" />
+</workflow-app>
