@@ -1,0 +1,11 @@
+Running the application
+=========================
+Start OOZIE : oozied.sh start
+
+oozie admin -oozie http://localhost:11000/oozie -status
+
+oozie job -oozie http://localhost:11000/oozie -config job.properties -run
+
+oozie job -oozie http://localhost:11000/oozie -config coordinator.properties -run
+
+oozie job -kill 0000005-180310130049860-oozie-bala-C

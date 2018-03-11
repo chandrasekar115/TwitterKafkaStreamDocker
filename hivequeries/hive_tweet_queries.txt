@@ -88,12 +88,5 @@ create table tweets_sentiment as select
 from l3 group by  time_stamp, id, user_screen_name, hashtags;
 
 
-create table tweets_sentiment_hashtags as select 
- hashtags,
-  case 
-    when sum( polarity ) > 0 then 'positive' 
-    when sum( polarity ) < 0 then 'negative'  
-    else 'neutral' end as sentiment, count(*) as count_sentiment
-from l3 group by  hashtags;
 
 
