@@ -1,3 +1,4 @@
 CREATE DATABASE twitter;
 CREATE TABLE product_counts(hashtags varchar(200),total_counts int(11));
 create table trending_tweets(hashtags varchar(200),word varchar(200),cnt int);
+create table tweets_sentiment(hastags varchar(200),sentiment varchar(200),cnt int);

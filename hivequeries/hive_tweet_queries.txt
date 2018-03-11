@@ -79,13 +79,13 @@ create view l3 as select
 create view trending_tweets as select hashtags,l3.word,count(*) as cnt from l3 where polarity in (1,-1) group by hashtags,l3.word having cnt>=10;
 
  
-create table tweets_sentiment as select 
- time_stamp, id, user_screen_name, hashtags,
+create view tweets_sentiment as select hashtags,
   case 
     when sum( polarity ) > 0 then 'positive' 
     when sum( polarity ) < 0 then 'negative'  
-    else 'neutral' end as sentiment 
-from l3 group by  time_stamp, id, user_screen_name, hashtags;
+    else 'neutral' end as sentiment,count(*)
+from l3 group by hashtags, polarity;
+
 
 
 
