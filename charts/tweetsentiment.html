@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Twitter Sentiment</title>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="http://rawgit.com/jamesleesaunders/d3-ez/master/build/d3-ez.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://rawgit.com/jamesleesaunders/d3.ez/master/build/d3-ez.css" />
+</head>
+
+<body>
+  <div id="chartholder" style="text-align: center">
+	<h1>Twitter Sentiment Counts for Indian Telecommunication Industry</h1>
+  </div>
+  <br/>
+  <div style="text-align: center">Value: <span id="message"></span></div>
+
+  <script type="text/javascript">
+
+		d3.json("http://35.226.227.94:8080/twitter-alp-service/alp/tweetsentiment", function(error, data) {
+				var chart = d3.ez.chart.barChartStacked()
+				.yAxisLabel("Seats")
+				.colors(['#c00', '#36c', '#f90', '#fc0']);
+			var legend = d3.ez.component.legend().title("Sentiment");
+			var title = d3.ez.component.title().mainText("").subText("");
+
+			// Create chart base
+			var myChart = d3.ez.base()
+				.width(1300)
+				.height(500)
+				.chart(chart)
+				.legend(legend)
+				.title(title)
+				.on("customValueMouseOver", function(d, i) {
+					d3.select("#message").text(d.value);
+				});
+
+			// Add to page
+			d3.select("#chartholder")
+				.datum(data)
+				.call(myChart);
+		});
+
+  </script>
+</body>
+
+</html>
