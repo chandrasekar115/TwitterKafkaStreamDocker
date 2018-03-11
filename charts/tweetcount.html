@@ -54,7 +54,7 @@ rect {
 
 			d3
 					.json(
-							'http://35.226.227.94:8080/twitter-alp-service/alp/prodcount',
+							'http://localhost:8080/twitter-alp-service/alp/prodcount',
 							function(error, dataset) { // NEW
 								dataset.forEach(function(d) { // NEW
 									d.totalCounts = +d.totalCounts; // NEW

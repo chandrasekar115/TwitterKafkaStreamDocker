@@ -30,7 +30,7 @@ text {
 
         d3
                 .json(
-                        'http://35.226.227.94:8080/twitter-alp-service/alp/Jio',
+                        'http://localhost:8080/twitter-alp-service/alp/Jio',
                         function(error, root) {
                             var node = svg.selectAll(".node").data(
                                     bubble.nodes(classes(root)).filter(

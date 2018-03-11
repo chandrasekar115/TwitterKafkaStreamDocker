@@ -10,7 +10,7 @@
 	var countryApp = angular.module('countryApp', []);
 	countryApp.controller('CountryCtrl', function($scope, $http) {
 		$http.get(
-				'http://35.226.227.94:8080/twitter-alp-service/alp/prodcount')
+				'http://localhost:8080/twitter-alp-service/alp/prodcount')
 				.success(function(response) {
 					console.log(response);
 					$scope.countries = response.productCountList;
