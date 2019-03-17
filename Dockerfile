@@ -16,3 +16,5 @@ ADD /TwitterKafkaStreamDocker/docker-quickstart /usr/bin/
 RUN chmod 777 -R /usr/bin/docker-quickstart
 ADD /TwitterKafkaStreamDocker /
 ADD /TwitterKafkaStreamDocker/target /
+ADD /TwitterKafkaStreamDocker/kafkaproducer.sh /
+RUN chmod 777 -R /kafkaproducer.sh
