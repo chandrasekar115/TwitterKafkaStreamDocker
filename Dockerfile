@@ -12,7 +12,7 @@ RUN tar -xvf spark-2.4.0-bin-hadoop2.6.tgz && mv spark-2.4.0-bin-hadoop2.6 spark
 RUN tar -xvf kafka_2.11-0.11.0.0.tgz && mv kafka_2.11-0.11.0.0 kafka
 RUN yum update -y nss curl libcurl || true
 #RUN git clone -b master https://github.com/chandrasekar115/TwitterKafkaStreamDocker.git
-ADD docker-quickstart /usr/bin/
+ADD /TwitterKafkaStreamDocker/docker-quickstart /usr/bin/
 RUN chmod 777 -R /usr/bin/docker-quickstart
 ADD /TwitterKafkaStreamDocker /
 ADD /TwitterKafkaStreamDocker/target /
