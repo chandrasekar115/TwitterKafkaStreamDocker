@@ -31,8 +31,8 @@ else
         hbase-thrift \
         hive-metastore \
         hive-server2 \
+	spark-history-server \
         sqoop2-server \
-        spark-history-server \
         hbase-regionserver \
         hue \
         impala-state-store \
