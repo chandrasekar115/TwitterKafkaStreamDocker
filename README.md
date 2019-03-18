@@ -16,7 +16,7 @@
 	- > sudo docker build -t docker-analytics-setup .
 
 2. **Run Docker image**
-	- > sudo docker run --hostname=quickstart.cloudera --privileged=true -t -i --docker_image_id-- /usr/bin/docker-quickstart
+	- > sudo docker run --hostname=quickstart.cloudera --privileged=true -t -i **--docker_image_id--** /usr/bin/docker-quickstart
 	
 	- **Command to find docker_image_id :**
 	- > sudo docker images
