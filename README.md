@@ -12,6 +12,7 @@
 ## Steps to setup the project
 
 1. **Build Docker image**
+	-> cd /docker_files/docker-analytics/DockerSetup/TwitterKafkaStreamDocker
 	-> sudo docker build -t docker-analytics-setup .
 
 2. **Run Docker image**
