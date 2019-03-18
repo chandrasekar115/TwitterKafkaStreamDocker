@@ -18,6 +18,9 @@
 2. **Run Docker image**
 	- > sudo docker run --hostname=quickstart.cloudera --privileged=true -t -i **--docker_image_id--** /usr/bin/docker-quickstart
 	
+	**Example command**
+	- > sudo docker run --hostname=quickstart.cloudera --privileged=true -t -i **933a400d96ac** /usr/bin/docker-quickstart
+	
 	- **Command to find docker_image_id :**
 	- > sudo docker images
 
