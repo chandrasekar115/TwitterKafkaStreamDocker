@@ -30,3 +30,8 @@
 4. **Kafka Consumer - Aggregated Tweets**
 	- > bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic twitterstreamconsumer --from-beginning
 	
+5. **Steps to stop and remove docker images**
+	- > sudo docker stop $(sudo docker ps -aq)
+	- > sudo docker rm $(sudo docker ps -aq)
+	- > sudo docker rmi -f $(sudo docker images -a -q)
+	
