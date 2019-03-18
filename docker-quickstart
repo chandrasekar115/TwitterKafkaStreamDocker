@@ -55,4 +55,5 @@ sleep 40
 cd /kafka && bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic twitterstreamproducer
 cd /kafka && bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic twitterstreamconsumer
 bash /kafkaproducer.sh &
+bash /sparkkafkaconsumer.sh &
 exec bash
